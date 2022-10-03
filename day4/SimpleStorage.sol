@@ -13,7 +13,7 @@ contract SimpleStorage {
 
     uint256 public favoriteNumber; //Initialised to zero
                                     // default visibility is internal
-    function store(uint256 _favoriteNumber) public {
+    function store(uint256 _favoriteNumber) public virtual {
         favoriteNumber = _favoriteNumber;
         //retrieve(); then it will cost us gas
     }
@@ -29,5 +29,27 @@ contract SimpleStorage {
 
     function add() public pure returns(uint256) {
         return (1+1);
+    }
+
+    mapping(string => uint256) public nameToFavoriteNumber; //just like dictionary
+
+    struct People {
+        uint256 favoriteNumber;
+        string name;
+    }
+
+    //uint256[] public favoriteNumbersList;
+    //People[3] public people;  STATIC ARRAY!!
+    People[] public people;      //DYNAMIC ARRAY
+
+    function addPerson(string memory _name, uint256 _favoriteNumber) public {
+        People memory newPerson = People({favoriteNumber: _favoriteNumber , name: _name });
+        //People memory newPerson = People( _favoriteNumber , _name);  This also works the same
+
+        people.push(newPerson);
+        //people.push(People( _favoriteNumber , _name));   SINGLE LINE implementation
+    
+        nameToFavoriteNumber[_name] = _favoriteNumber;
+    
     }
 }
