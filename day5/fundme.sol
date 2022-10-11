@@ -9,7 +9,7 @@ import "./PriceConverter.sol";
 
 contract FundMe {
 
-    // costant , immutable : keywords are used for GAS OPTIMISATION
+    // constant , immutable : keywords are used for GAS OPTIMISATION
 
     using PriceConverter for uint256;
 
